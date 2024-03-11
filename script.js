@@ -49,11 +49,11 @@ var sketchProc = function (processingInstance) {
         };
         var playButton = new Button({ buttonX: 127, buttonY: 177, buttonWidth: 120, buttonHeight: 40, color1: 4, color2: 255, color3: 0, isPlayButton: true });
 
-        var rightButton = new Button({ buttonX: 72, buttonY: 420, buttonWidth: 57, buttonHeight: 20, isRight: true });
+        var rightButton = new Button({ buttonX: 82, buttonY: 415, buttonWidth: 68, buttonHeight: 24, isRight: true });
 
-        var leftButton = new Button({ buttonX: 10, buttonY: 420, buttonWidth: 57, buttonHeight: 20, isLeft: true });
+        var leftButton = new Button({ buttonX: 8, buttonY: 415, buttonWidth: 68, buttonHeight: 24, isLeft: true });
 
-        var upButton = new Button({ buttonX: 328, buttonY: 420, buttonWidth: 57, buttonHeight: 20, isUp: true });
+        var upButton = new Button({ buttonX: 324, buttonY: 415, buttonWidth: 68, buttonHeight: 24, isUp: true });
 
         var buttons = [playButton, rightButton, leftButton, upButton];
 
@@ -192,7 +192,7 @@ var sketchProc = function (processingInstance) {
             }
             if (this.isLeft === true || this.isRight === true || this.isUp === true) {
                 if (currentLevel > 0) {
-                    line(0 * mult, 400 * mult, 400 * mult, 400 * mult)
+                    line(0 * mult, 400 * mult, 400 * mult, 400 * mult);
                     fill(0, 85, 255);
                     rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight);
                 }
