@@ -1,7 +1,7 @@
 var sketchProc = function (processingInstance) {
     with (processingInstance) {
         var mult = 2;
-        size(400 * mult, 450 * mult);
+        size(500 * mult, 400 * mult);
         frameRate(60);
         smooth();
 
@@ -49,11 +49,11 @@ var sketchProc = function (processingInstance) {
         };
         var playButton = new Button({ buttonX: 127, buttonY: 177, buttonWidth: 120, buttonHeight: 40, color1: 4, color2: 255, color3: 0, isPlayButton: true });
 
-        var rightButton = new Button({ buttonX: 82, buttonY: 415, buttonWidth: 68, buttonHeight: 24, isRight: true });
+        var rightButton = new Button({ buttonX: 82, buttonY: 371, buttonWidth: 68, buttonHeight: 24, isRight: true });
 
-        var leftButton = new Button({ buttonX: 8, buttonY: 415, buttonWidth: 68, buttonHeight: 24, isLeft: true });
+        var leftButton = new Button({ buttonX: 8, buttonY: 371, buttonWidth: 68, buttonHeight: 24, isLeft: true });
 
-        var upButton = new Button({ buttonX: 324, buttonY: 415, buttonWidth: 68, buttonHeight: 24, isUp: true });
+        var upButton = new Button({ buttonX: 410, buttonY: 371, buttonWidth: 68, buttonHeight: 24, isUp: true });
 
         var buttons = [playButton, rightButton, leftButton, upButton];
 
@@ -86,7 +86,7 @@ var sketchProc = function (processingInstance) {
         var Platform5 = new Platform({ x: 229, y: 226, width: 60, height: 20, canKill: false });
         var Platform6 = new Platform({ x: 119, y: 187, width: 60, height: 20, canKill: false });
         var Platform7 = new Platform({ x: 19, y: 136, width: 60, height: 20, canKill: false });
-        var Platform8 = new Platform({ x: 112, y: 72, width: 314, height: 20, canKill: false });
+        var Platform8 = new Platform({ x: 112, y: 72, width: 288, height: 20, canKill: false });
         var killPlatform1 = new Platform({ x: 209, y: 52, width: 60, height: 20, canKill: true });
 
         var Platform21 = new Platform({ x: 0, y: 340, width: 46, height: 60, canKill: false });
@@ -192,7 +192,7 @@ var sketchProc = function (processingInstance) {
             }
             if (this.isLeft === true || this.isRight === true || this.isUp === true) {
                 if (currentLevel > 0) {
-                    line(0 * mult, 400 * mult, 400 * mult, 400 * mult);
+                    line(400 * mult, 0, 400 * mult, 400 * mult)
                     fill(0, 85, 255);
                     rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight);
                 }
