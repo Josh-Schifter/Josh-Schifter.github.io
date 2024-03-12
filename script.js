@@ -1,7 +1,7 @@
 var sketchProc = function (processingInstance) {
     with (processingInstance) {
         var mult = 2;
-        size(500 * mult, 400 * mult);
+        size(400 * mult, 450 * mult);
         frameRate(60);
         smooth();
 
@@ -31,7 +31,6 @@ var sketchProc = function (processingInstance) {
             this.endY = endY * mult;
             this.endWidth = endWidth * mult;
             this.endHeight = endHeight * mult;
-
         };
         var Button = function (config) {
             this.buttonX = config.buttonX * mult;
@@ -45,17 +44,19 @@ var sketchProc = function (processingInstance) {
             this.isLeft = config.isLeft;
             this.isRight = config.isRight;
             this.isUp = config.isUp;
-
+            this.isRestartButton = config.isRestartButton;
         };
         var playButton = new Button({ buttonX: 127, buttonY: 177, buttonWidth: 120, buttonHeight: 40, color1: 4, color2: 255, color3: 0, isPlayButton: true });
 
-        var rightButton = new Button({ buttonX: 82, buttonY: 371, buttonWidth: 68, buttonHeight: 24, isRight: true });
+        var rightButton = new Button({ buttonX: 72, buttonY: 420, buttonWidth: 57, buttonHeight: 20, isRight: true });
 
-        var leftButton = new Button({ buttonX: 8, buttonY: 371, buttonWidth: 68, buttonHeight: 24, isLeft: true });
+        var leftButton = new Button({ buttonX: 10, buttonY: 420, buttonWidth: 57, buttonHeight: 20, isLeft: true });
 
-        var upButton = new Button({ buttonX: 410, buttonY: 371, buttonWidth: 68, buttonHeight: 24, isUp: true });
+        var upButton = new Button({ buttonX: 328, buttonY: 420, buttonWidth: 57, buttonHeight: 20, isUp: true });
 
-        var buttons = [playButton, rightButton, leftButton, upButton];
+        var restartButton = new Button({ buttonX: 142, buttonY: 335, buttonWidth: 120, buttonHeight: 40, color1: 4, color2: 255, color3: 0, isRestartButton: true });
+
+        var buttons = [playButton, rightButton, leftButton, upButton, restartButton];
 
         //Platforms
         var Platform = function (config) {
@@ -86,7 +87,7 @@ var sketchProc = function (processingInstance) {
         var Platform5 = new Platform({ x: 229, y: 226, width: 60, height: 20, canKill: false });
         var Platform6 = new Platform({ x: 119, y: 187, width: 60, height: 20, canKill: false });
         var Platform7 = new Platform({ x: 19, y: 136, width: 60, height: 20, canKill: false });
-        var Platform8 = new Platform({ x: 112, y: 72, width: 288, height: 20, canKill: false });
+        var Platform8 = new Platform({ x: 112, y: 72, width: 314, height: 20, canKill: false });
         var killPlatform1 = new Platform({ x: 209, y: 52, width: 60, height: 20, canKill: true });
 
         var Platform21 = new Platform({ x: 0, y: 340, width: 46, height: 60, canKill: false });
@@ -115,18 +116,22 @@ var sketchProc = function (processingInstance) {
         var killPlatform35 = new Platform({ x: 82, y: 160, width: 353, height: 20, canKill: true });
         var killPlatform36 = new Platform({ x: 0, y: 36, width: 353, height: 20, canKill: true });
 
-
         var platforms0 = [];
         var platforms1 = [Platform1, Platform2, Platform3, Platform4, Platform5, Platform6, Platform7, Platform8, killPlatform1];
+
         var platforms2 = [Platform21, Platform22, Platform23, Platform24, Platform25, Platform26, killPlatform21];
+
         var platforms3 = [Platform31, Platform32, Platform33, Platform34, Platform35, Platform36, Platform37, Platform38, Platform39, Platform310, Platform311, killPlatform31, killPlatform32, killPlatform33, killPlatform34, killPlatform35, killPlatform36];
+
         var platforms4 = [Platform31, Platform32, Platform33, Platform34, Platform35, Platform36, Platform37, Platform38, Platform39, Platform310, Platform311, killPlatform31, killPlatform32, killPlatform33, killPlatform34, killPlatform35, killPlatform36];
+
         var homeScreen = new Level(platforms0, 1, 1);
         var level1 = new Level(platforms1, 10, 340, 323, 35, 37, 37);
         var level2 = new Level(platforms2, 10, 340, 33, 16, 20, 20);
         var level3 = new Level(platforms3, 10, 380, 5, 5, 20, 20);
         var level4 = new Level(platforms4, 15, 15, 0, 360, 20, 20);
-        var levels = [homeScreen, level1, level2, level3, level4];
+        var endScreen = new Level(platforms0, 500, 500);
+        var levels = [homeScreen, level1, level2, level3, level4, endScreen];
         var currentLevel = 0;
 
         var blueBall = new Ball({ x: levels[currentLevel].startX, y: levels[currentLevel].startY });
@@ -141,6 +146,7 @@ var sketchProc = function (processingInstance) {
                 blueBall.vy = 0;
             }
         };
+
         Level.drawTextAndEnd = function () {
             fill(128, 96, 74);
             rect(levels[currentLevel].endX, levels[currentLevel].endY, levels[currentLevel].endWidth, levels[currentLevel].endHeight);
@@ -173,6 +179,16 @@ var sketchProc = function (processingInstance) {
                 fill(0, 0, 0);
                 text("Level 4: Reverse", 5 * mult, 3 * mult, 100 * mult, 100 * mult);
             }
+            if (currentLevel === 5) {
+                fill(0, 0, 0);
+                textSize(40 * mult);
+                text("The End...For Now", 29 * mult, 125 * mult, 438 * mult, 100 * mult);
+                textSize(32 * mult);
+                text("Restart", 149 * mult, 344 * mult, 271 * mult, 100 * mult);
+                textSize(20 * mult);
+                text("More Levels Coming Soon!", 76 * mult, 293 * mult, 271 * mult, 100 * mult);
+                textSize(12 * mult);
+            }
         };
 
         Button.prototype.draw = function () {
@@ -190,9 +206,24 @@ var sketchProc = function (processingInstance) {
                     }
                 }
             }
+
+            if (this.isRestartButton === true) {
+                if (currentLevel === 5) {
+                    fill(this.color1, this.color2, this.color3);
+                    rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight);
+                    if (mouseX > this.buttonX && mouseX < this.buttonX + this.buttonWidth && mouseY > this.buttonY && mouseY < this.buttonY + this.buttonHeight) {
+                        this.color1 = 37;
+                        this.color2 = 130;
+                    }
+                    else {
+                        this.color1 = 4;
+                        this.color2 = 255;
+                    }
+                }
+            }
             if (this.isLeft === true || this.isRight === true || this.isUp === true) {
                 if (currentLevel > 0) {
-                    line(400 * mult, 0, 400 * mult, 400 * mult)
+                    line(0 * mult, 400 * mult, 400 * mult, 400 * mult);
                     fill(0, 85, 255);
                     rect(this.buttonX, this.buttonY, this.buttonWidth, this.buttonHeight);
                 }
@@ -207,6 +238,9 @@ var sketchProc = function (processingInstance) {
                     blueBall.y = levels[currentLevel].startY;
                 }
 
+                if (this.isRestartButton === true) {
+                    currentLevel = 0;
+                }
                 if (this.isRight === true) {
                     if (!keys.includes(RIGHT)) {
                         keys.push(RIGHT);
@@ -435,6 +469,7 @@ var sketchProc = function (processingInstance) {
 
             background(189, 253, 255);
             playButton.draw();
+            restartButton.draw();
 
             Level.drawTextAndEnd();
             blueBall.draw();
