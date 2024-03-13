@@ -1,7 +1,7 @@
 var sketchProc = function (processingInstance) {
     with (processingInstance) {
         var mult = 2;
-        size(400 * mult, 450 * mult);
+        size(400 * mult, 400 * mult);
         frameRate(60);
         smooth();
 
@@ -477,9 +477,10 @@ var sketchProc = function (processingInstance) {
             for (var i = 0; i < platforms.length; i++) {
                 platforms[i].draw();
             }
-            rightButton.draw();
-            leftButton.draw();
-            upButton.draw();
+            //rightButton.draw();
+            //leftButton.draw();
+            //upButton.draw();
+            //I didn't use these buttons because they wouldn't work and I couldn't figure out why
         };
 
         mousePressed = function () {
